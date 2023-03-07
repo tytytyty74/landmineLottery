@@ -23,8 +23,14 @@ class Grid:
         if self.grid[x][y].number == 0:
             for x, y in self.getNeighbors(x, y):
                 self.open(x, y)
+        return True
     
     
     def getNeighbors(self, x, y):
-        return []
-    
+        retval = []
+        for i in range(x-1, x+1):
+            for j in range(y-1, y+1):
+                if i > 0 and i< self.xSize and j>0 and j<self.xSize and (i != x and j != y):
+                    retval.append((i, j))
+
+        return retval
