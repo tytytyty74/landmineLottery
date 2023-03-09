@@ -1,20 +1,23 @@
 class Cell:
-    isBomb = False
+    bomb = False
     isOpened = False
     number = 0
-    def __new__(self, isBomb, isOpened, number):
-        self.isBomb = isBomb
+    def __init__(self, bomb, isOpened, number):
+        self.bomb = bomb
         self.isOpened = isOpened
         self.number = number
+    def __str__(self):
+        return "["+ ("X"if self.isBomb() else " ")+ "]"
+    
 
-    def changeBomb(self, isBomb):
-        self.isBomb = isBomb
+    def changeBomb(self, bomb):
+        self.bomb = bomb
     
     def makeBomb(self):
-        self.isBomb =True
+        self.bomb =True
     
     def isBomb(self):
-        return self.isBomb
+        return self.bomb
 
     def isOpened(self):
         return self.isOpened
