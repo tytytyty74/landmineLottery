@@ -1,4 +1,5 @@
 from cell import Cell
+from random import randrange
 class Grid:
     grid = []
     xSize, ySize = 0, 0
@@ -31,10 +32,22 @@ class Grid:
                 retval += str(j)
             retval += "\n"
         return retval
-        
+    def isBomb(self, x, y):
+        return self.grid[x][y].isBomb()
     
     def addBomb(self, x, y):
         self.grid[x][y].makeBomb()
+    
+    def addRandomBombs(self, numBombs):
+        for i in range(0, numBombs):
+            needBomb = True
+            while needBomb:
+                x, y = (randrange(self.xSize), randrange(self.ySize))
+                print(x, y)
+                if (not self.isBomb(x, y)):
+                    self.addBomb(x, y)
+                    needBomb = False
+
 
     def removeBomb(self, x, y):
         self.grid[x][y].changeBomb(False)
@@ -64,10 +77,10 @@ class GridRow:
     def __init__(self, row, len):
         self.row = row
         self.len = len
-        self.iterVal = -1;
+        self.iterVal = -1
 
     def __iter__(self):
-        self.iterVal = 0
+        self.iterVal = -1
         return self
     
     def __next__(self):
