@@ -7,7 +7,7 @@ class Cell:
         self.isOpened = isOpened
         self.number = number
     def __str__(self):
-        return "["+ ("X"if self.isBomb() else " ")+ "]"
+        return "["+ ("X"if self.isBomb() else str(self.number))+ "]"
     
 
     def changeBomb(self, bomb):
@@ -28,7 +28,7 @@ class Cell:
     def close(self):
         self.isOpened = False
 
-    def number(self):
+    def getNumber(self):
         return self.number
     
     def setNumber(self, n):
