@@ -69,6 +69,13 @@ class Grid:
     def removeBomb(self, x, y):
         self.grid[x][y].changeBomb(False)
 
+    def nonRecursiveOpen(self, x, y):
+        self.grid[x][y].open()
+        if self.grid[x][y].isBomb():
+            return False
+        return True
+        
+
     def open(self, x, y):
         self.grid[x][y].open()
         if self.grid[x][y].isBomb():
@@ -84,7 +91,7 @@ class Grid:
         for i in range(x-1, x+2):
             for j in range(y-1, y+2):
                 print()
-                if i > 0 and i< self.xSize and j>0 and j<self.ySize and not (i == x and j == y):
+                if i >= 0 and i< self.xSize and j>=0 and j<self.ySize and not (i == x and j == y):
                     retval.append((i, j))
         
         return retval
