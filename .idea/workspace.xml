@@ -4,7 +4,24 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="3fd5b830-3910-44d1-866a-fe7d0d7fae95" name="Changes" comment="">
+    <list default="true" id="3fd5b830-3910-44d1-866a-fe7d0d7fae95" name="Changes" comment="added pygame + show a red square">
+      <change afterPath="$PROJECT_DIR$/.idea/inspectionProfiles/Project_Default.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/resources/Grid.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/resources/empty.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/resources/flag.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/resources/grid1.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/resources/grid2.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/resources/grid3.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/resources/grid4.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/resources/grid5.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/resources/grid6.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/resources/grid7.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/resources/grid8.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/resources/mine.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/resources/mineClicked.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/resources/mineFalse.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/grid.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/grid.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/main.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -31,13 +48,19 @@
   <component name="PropertiesComponent">
     <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
+    <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
     <property name="jdk.selected.JAVA_MODULE" value="openjdk-19" />
     <property name="jdk.selected.PYTHON_MODULE" value="Python 3.10 (python3.11.2)" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/src/main.py" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/src/resources" />
     <property name="project.structure.last.edited" value="Project" />
     <property name="project.structure.proportion" value="0.17" />
     <property name="project.structure.side.proportion" value="0.2" />
     <property name="settings.editor.selected.configurable" value="preferences.pluginManager" />
+  </component>
+  <component name="RecentsManager">
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="C:\Users\Stephane\Documents\Github_Projects\landmineLottery\src\resources" />
+    </key>
   </component>
   <component name="RunManager">
     <configuration default="true" type="JetRunConfigurationType">
@@ -148,6 +171,14 @@
       <option name="presentableId" value="Default" />
       <updated>1678224114785</updated>
     </task>
+    <task id="LOCAL-00001" summary="added pygame + show a red square">
+      <created>1679000402829</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1679000402829</updated>
+    </task>
+    <option name="localTasksCounter" value="2" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -160,6 +191,11 @@
         </entry>
       </map>
     </option>
+    <option name="oldMeFiltersMigrated" value="true" />
+  </component>
+  <component name="VcsManagerConfiguration">
+    <MESSAGE value="added pygame + show a red square" />
+    <option name="LAST_COMMIT_MESSAGE" value="added pygame + show a red square" />
   </component>
   <component name="XSLT-Support.FileAssociations.UIState">
     <expand />
