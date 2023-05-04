@@ -1,6 +1,7 @@
 import socket
 from _thread import *
 import sys
+#from game import GameFile
 
 server = "IPV4 ADDRESS HERE" #input local ip addr
 port = 5555  #use accessible port
