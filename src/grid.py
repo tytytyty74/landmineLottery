@@ -9,7 +9,7 @@ class Grid:
         for i in range(xSize):
             self.grid.append([])
             for j in range(ySize):
-                self.grid[i].append(Cell(False, False, 0))
+                self.grid[i].append(Cell(False, False, 0, i, j))
 
     
     def __iter__(self):

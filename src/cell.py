@@ -1,11 +1,28 @@
+import pygame
+
+grid_size = 32
+border = 16
+top_border = 100
+game_width = 10
+game_height = 10
 class Cell:
     bomb = False
     isOpened = False
+    flag = False
     number = 0
-    def __init__(self, bomb, isOpened, number):
+    clicked = False
+    x= 0
+    y = 0
+
+    
+    def __init__(self, bomb, isOpened, number, x, y):
         self.bomb = bomb
         self.isOpened = isOpened
         self.number = number
+        self.x = x
+        self.y = y
+        self.rect = pygame.Rect(border + self.x * grid_size, top_border + self.y * grid_size, grid_size,
+                                grid_size)
     def __str__(self):
         return "["+ ("X"if self.isBomb() else str(self.number))+ "]"
     
@@ -33,3 +50,6 @@ class Cell:
     
     def setNumber(self, n):
         self.number = n
+
+    def setFlag(self, bool):
+        self.flag = flag

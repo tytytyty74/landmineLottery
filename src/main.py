@@ -1,6 +1,44 @@
 import pygame
 from random import randrange
+from grid import Grid 
+from time import sleep
 import random
+def drawGrid(cell, side = "left"):
+        # Draw the grid according to bool variables and value of grid
+        if cell.clicked and cell.bomb:
+            screen.blit(spr_mineFalse, cell.rect)
+        else:
+            if cell.clicked:
+                if cell.bomb:
+                    if cell.mineClicked:
+                        screen.blit(spr_mineClicked, cell.rect)
+                    else:
+                        screen.blit(spr_mine, cell.rect)
+                else:
+                    if cell.number == 0:
+                        screen.blit(spr_emptyGrid, cell.rect)
+                    elif cell.number == 1:
+                        screen.blit(spr_grid1, cell.rect)
+                    elif cell.number == 2:
+                        screen.blit(spr_grid2, cell.rect)
+                    elif cell.number == 3:
+                        screen.blit(spr_grid3, cell.rect)
+                    elif cell.number == 4:
+                        screen.blit(spr_grid4, cell.rect)
+                    elif cell.number == 5:
+                        screen.blit(spr_grid5, cell.rect)
+                    elif cell.number == 6:
+                        screen.blit(spr_grid6, cell.rect)
+                    elif cell.number == 7:
+                        screen.blit(spr_grid7, cell.rect)
+                    elif cell.number == 8:
+                        screen.blit(spr_grid8, cell.rect)
+
+            else:
+                if cell.flag:
+                    screen.blit(spr_flag, cell.rect)
+                else:
+                    screen.blit(spr_grid, cell.rect)
 
 # resources 
 spr_mine = pygame.image.load("resources/mine.png")
@@ -36,6 +74,129 @@ screen = pygame.display.set_mode((screen_width, screen_height))
 pygame.display.set_caption('LandMineLottery')
 clock = pygame.time.Clock()
 timer = pygame.time.Clock()  # timer
+
+
+
+# draw texts in center of screen
+def drawText(txt, s, yOff=0):
+    screen_text = pygame.font.SysFont("Calibri", s, True).render(txt, True, (0, 0, 0))
+    rect = screen_text.get_rect()
+    rect.center = (game_width / 2, game_height / 2)
+    screen.blit(screen_text, rect)
+
+
+# actual game
+def gameInSession():
+    # init
+    grid_color = (128, 128, 128)
+    bg_color = (192, 192, 192)
+    gameState = "Playing"
+    mineLeft = 9  # Number of mine left
+    global grid
+    grid = Grid(16, 16)
+    global mines
+    time = 0  # Set time to 0
+    white = (255, 255, 255)
+
+    # title screen
+    # test_font = pygame.font.Font('font/Pixeltype.ttf', 50)
+    # score_message_surf = test_font.render(f'LandmineLottery - {gameState}', False, (111, 196, 169))
+    # score_message_rect = score_message_surf.get_rect(center=(screen_width / 2, screen_yOffSet - 5))
+    # screen.blit(score_message_surf, score_message_rect)
+
+    # Generating mines
+    grid.addRandomBombs(mineLeft)
+
+    # drawing first player's entire grid
+
+    # update the first player's of the grid
+    grid.calcAllNumbers()
+
+    # game loop
+    while gameState != "Exit":
+        # Reset screen
+        screen.fill(bg_color)
+
+        # User inputs
+        for event in pygame.event.get():
+            # Check if player close window
+            if event.type == pygame.QUIT:
+                gameState = "Exit"
+            # Check if play restart
+            if gameState == "Game Over" or gameState == "Win":
+                if event.type == pygame.KEYDOWN:
+                    if event.key == pygame.K_r:
+                        gameState = "Exit"
+                        gameInSession()
+            else:
+                if event.type == pygame.MOUSEBUTTONUP:
+                    for i in grid:
+                        for j in i:
+                            if j.rect.collidepoint(event.pos):
+                                if event.button == 1:
+                                    # If player left clicked of the grid
+                                    j.clicked = True
+                                    grid.open(j.x, j.y)
+                                    # If it's a mine
+                                    if j.isBomb():
+                                        gameState = "Game Over"
+                                    grid.open(j.x, j.y)
+                                elif event.button == 3:
+                                    # If the player right clicked
+                                    if not j.isOpened():
+                                        if j.flag:
+                                            j.flag = False
+                                            mineLeft += 1
+                                        else:
+                                            j.flag = True
+                                            mineLeft -= 1
+
+            # Check if won
+        w = True
+        for i in grid:
+            for j in i:
+                drawGrid(j)
+                if not j.bomb and not j.clicked:
+                    w = False
+        if w and gameState != "Exit":
+            gameState = "Win"
+
+        # Draw Texts
+        if gameState != "Game Over" and gameState != "Win":
+            time += 1
+        elif gameState == "Game Over":
+            drawText("Game Over!", 50)
+            drawText("R to restart", 35, 50)
+            # for i in grid:
+            #     for j in i:
+            #         if j.flag and not j.bomb:
+            #             j.mineFalse = True
+        else:
+            drawText("You WON!", 50)
+            drawText("R to restart", 35, 50)
+
+        # Draw time
+        s = str(time // 15)
+        screen_text = pygame.font.SysFont("Calibri", 50).render(s, True, (0, 0, 0))
+        screen.blit(screen_text, (border, border))
+
+        # Draw mine left
+        screen_text = pygame.font.SysFont("Calibri", 50).render(mineLeft.__str__(), True, (0, 0, 0))
+        screen.blit(screen_text, (screen_width - border - 50, border))
+        
+
+    pygame.display.update()
+    timer.tick(15)
+    sleep(0.1)
+
+
+gameInSession()
+pygame.quit()
+quit()
+
+
+'''
+
 
 # the grid
 class Grid:
@@ -271,145 +432,4 @@ class Cell:
     def setNumber(self, n):
         self.number = n
 
-
-# draw texts in center of screen
-def drawText(txt, s, yOff=0):
-    screen_text = pygame.font.SysFont("Calibri", s, True).render(txt, True, (0, 0, 0))
-    rect = screen_text.get_rect()
-    rect.center = (game_width / 2, game_height / 2)
-    screen.blit(screen_text, rect)
-
-
-# actual game
-def gameInSession():
-    # init
-    grid_color = (128, 128, 128)
-    bg_color = (192, 192, 192)
-    gameState = "Playing"
-    mineLeft = 9  # Number of mine left
-    global grid
-    grid = []
-    global mines
-    time = 0  # Set time to 0
-    white = (255, 255, 255)
-
-    # title screen
-    # test_font = pygame.font.Font('font/Pixeltype.ttf', 50)
-    # score_message_surf = test_font.render(f'LandmineLottery - {gameState}', False, (111, 196, 169))
-    # score_message_rect = score_message_surf.get_rect(center=(screen_width / 2, screen_yOffSet - 5))
-    # screen.blit(score_message_surf, score_message_rect)
-
-    # Generating mines
-    mines = [[random.randrange(0, game_width),
-              random.randrange(0, game_height)]]
-
-    for c in range(mineLeft - 1):
-        pos = [random.randrange(0, game_width),
-               random.randrange(0, game_height)]
-        same = True
-        while same:
-            for i in range(len(mines)):
-                if pos == mines[i]:
-                    pos = [random.randrange(0, game_width), random.randrange(0, game_height)]
-                    break
-                if i == len(mines) - 1:
-                    same = False
-        mines.append(pos)
-
-    # drawing first player's entire grid
-    for j in range(game_height):
-        line = []
-        for i in range(game_width):
-            if [i, j] in mines:
-                line.append(Grid(xGrid=i, yGrid=j, type=-1))
-            else:
-                line.append(Grid(xGrid=i, yGrid=j, type=0))
-        grid.append(line)
-
-    # update the first player's of the grid
-    for i in grid:
-        for j in i:
-            j.updateValue()
-
-    # game loop
-    while gameState != "Exit":
-        # Reset screen
-        screen.fill(bg_color)
-
-        # User inputs
-        for event in pygame.event.get():
-            # Check if player close window
-            if event.type == pygame.QUIT:
-                gameState = "Exit"
-            # Check if play restart
-            if gameState == "Game Over" or gameState == "Win":
-                if event.type == pygame.KEYDOWN:
-                    if event.key == pygame.K_r:
-                        gameState = "Exit"
-                        gameInSession()
-            else:
-                if event.type == pygame.MOUSEBUTTONUP:
-                    for i in grid:
-                        for j in i:
-                            if j.rect.collidepoint(event.pos):
-                                if event.button == 1:
-                                    # If player left clicked of the grid
-                                    j.revealGrid()
-                                    # Toggle flag off
-                                    if j.flag:
-                                        mineLeft += 1
-                                        j.falg = False
-                                    # If it's a mine
-                                    if j.val == -1:
-                                        gameState = "Game Over"
-                                        j.mineClicked = True
-                                elif event.button == 3:
-                                    # If the player right clicked
-                                    if not j.clicked:
-                                        if j.flag:
-                                            j.flag = False
-                                            mineLeft += 1
-                                        else:
-                                            j.flag = True
-                                            mineLeft -= 1
-
-            # Check if won
-        w = True
-        for i in grid:
-            for j in i:
-                j.drawGrid()
-                if j.val != -1 and not j.clicked:
-                    w = False
-        if w and gameState != "Exit":
-            gameState = "Win"
-
-        # Draw Texts
-        if gameState != "Game Over" and gameState != "Win":
-            time += 1
-        elif gameState == "Game Over":
-            drawText("Game Over!", 50)
-            drawText("R to restart", 35, 50)
-            for i in grid:
-                for j in i:
-                    if j.flag and j.val != -1:
-                        j.mineFalse = True
-        else:
-            drawText("You WON!", 50)
-            drawText("R to restart", 35, 50)
-
-        # Draw time
-        s = str(time // 15)
-        screen_text = pygame.font.SysFont("Calibri", 50).render(s, True, (0, 0, 0))
-        screen.blit(screen_text, (border, border))
-
-        # Draw mine left
-        screen_text = pygame.font.SysFont("Calibri", 50).render(mineLeft.__str__(), True, (0, 0, 0))
-        screen.blit(screen_text, (screen_width - border - 50, border))
-
-    pygame.display.update()
-    timer.tick(15)  
-
-
-gameInSession()
-pygame.quit()
-quit()
+'''
