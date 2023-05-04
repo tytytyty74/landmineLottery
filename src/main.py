@@ -68,7 +68,7 @@ game_height = 10
 
 # pygame setup stuff
 pygame.init()
-screen_yOffSet = 100
+screen_yOffSet = 150
 screen_xOffSet = 100
 screen_width = 16 * 25 * 2 + screen_xOffSet
 screen_height = 16 * 25 + 100 + screen_yOffSet
@@ -77,13 +77,18 @@ pygame.display.set_caption('LandMineLottery')
 clock = pygame.time.Clock()
 timer = pygame.time.Clock()  # timer
 
+# title screen
+test_font = pygame.font.Font('font/Pixeltype.ttf', 50)
+score_message_surf = test_font.render(f'LandmineLottery', False, (111, 196, 169))
+score_message_rect = score_message_surf.get_rect(center=(screen_width / 2, screen_yOffSet - 5))
+screen.blit(score_message_surf, score_message_rect)
 
 
 # draw texts in center of screen
 def drawText(txt, s, yOff=0):
     screen_text = pygame.font.SysFont("Calibri", s, True).render(txt, True, (0, 0, 0))
     rect = screen_text.get_rect()
-    rect.center = (game_width / 2, game_height / 2)
+    rect.center = (screen_width / 2 + (screen_xOffSet * 2.5), screen_height / 2 + yOff)
     screen.blit(screen_text, rect)
 
 
@@ -100,11 +105,7 @@ def gameInSession():
     time = 0  # Set time to 0
     white = (255, 255, 255)
 
-    # title screen
-    # test_font = pygame.font.Font('font/Pixeltype.ttf', 50)
-    # score_message_surf = test_font.render(f'LandmineLottery - {gameState}', False, (111, 196, 169))
-    # score_message_rect = score_message_surf.get_rect(center=(screen_width / 2, screen_yOffSet - 5))
-    # screen.blit(score_message_surf, score_message_rect)
+
 
     # Generating mines
     grid.addRandomBombs(mineLeft)
@@ -169,10 +170,10 @@ def gameInSession():
         elif gameState == "Game Over":
             drawText("Game Over!", 50)
             drawText("R to restart", 35, 50)
-            # for i in grid:
-            #     for j in i:
-            #         if j.flag and not j.bomb:
-            #             j.mineFalse = True
+            for i in grid:
+                for j in i:
+                    if j.flag and not j.bomb:
+                        j.mineFalse = True
         else:
             drawText("You WON!", 50)
             drawText("R to restart", 35, 50)
