@@ -3,7 +3,7 @@ from random import randrange
 from grid import Grid 
 from time import sleep
 import random
-def drawGrid(cell, side = "left"):
+def drawGrid(cell, gameover = False, side = "left"):
         # Draw the grid according to bool variables and value of grid
         if cell.isOpened and cell.bomb:
             screen.blit(spr_mineFalse, cell.rect)
@@ -37,6 +37,8 @@ def drawGrid(cell, side = "left"):
             else:
                 if cell.flag:
                     screen.blit(spr_flag, cell.rect)
+                elif gameover and cell.bomb:
+                    screen.blit(spr_mine, cell.rect)
                 else:
                     screen.blit(spr_grid, cell.rect)
 
@@ -155,7 +157,7 @@ def gameInSession():
         w = True
         for i in grid:
             for j in i:
-                drawGrid(j)
+                drawGrid(j, gameover=gameState == "Game Over")
                 if not j.bomb and not j.isOpened:
                     w = False
         if w and gameState != "Exit":

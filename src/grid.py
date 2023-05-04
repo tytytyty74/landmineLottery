@@ -82,7 +82,6 @@ class Grid:
             return False
         if self.grid[x][y].number == 0:
             for x2, y2 in self.getNeighbors(x, y):
-
                 if not self.grid[x2][y2].isOpened:
                     self.open(x2, y2)
         return True
