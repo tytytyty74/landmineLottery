@@ -10,7 +10,6 @@ class Cell:
     isOpened = False
     flag = False
     number = 0
-    clicked = False
     x= 0
     y = 0
 
@@ -35,9 +34,6 @@ class Cell:
     
     def isBomb(self):
         return self.bomb
-
-    def isOpened(self):
-        return self.isOpened
     
     def open(self):
         self.isOpened = True

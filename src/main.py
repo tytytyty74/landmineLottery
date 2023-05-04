@@ -5,10 +5,10 @@ from time import sleep
 import random
 def drawGrid(cell, side = "left"):
         # Draw the grid according to bool variables and value of grid
-        if cell.clicked and cell.bomb:
+        if cell.isOpened and cell.bomb:
             screen.blit(spr_mineFalse, cell.rect)
         else:
-            if cell.clicked:
+            if cell.isOpened:
                 if cell.bomb:
                     if cell.mineClicked:
                         screen.blit(spr_mineClicked, cell.rect)
@@ -91,7 +91,7 @@ def gameInSession():
     grid_color = (128, 128, 128)
     bg_color = (192, 192, 192)
     gameState = "Playing"
-    mineLeft = 9  # Number of mine left
+    mineLeft = 15  # Number of mine left
     global grid
     grid = Grid(16, 16)
     global mines
@@ -143,7 +143,7 @@ def gameInSession():
                                     grid.open(j.x, j.y)
                                 elif event.button == 3:
                                     # If the player right clicked
-                                    if not j.isOpened():
+                                    if not j.isOpened:
                                         if j.flag:
                                             j.flag = False
                                             mineLeft += 1
@@ -156,7 +156,7 @@ def gameInSession():
         for i in grid:
             for j in i:
                 drawGrid(j)
-                if not j.bomb and not j.clicked:
+                if not j.bomb and not j.isOpened:
                     w = False
         if w and gameState != "Exit":
             gameState = "Win"
@@ -187,6 +187,7 @@ def gameInSession():
 
         pygame.display.update()
         timer.tick(15)
+    print(grid)
 
 
 gameInSession()

@@ -81,9 +81,10 @@ class Grid:
         if self.grid[x][y].isBomb():
             return False
         if self.grid[x][y].number == 0:
-            for x, y in self.getNeighbors(x, y):
-                if not self.grid[x][y].isOpened:
-                    self.open(x, y)
+            for x2, y2 in self.getNeighbors(x, y):
+
+                if not self.grid[x2][y2].isOpened:
+                    self.open(x2, y2)
         return True
     
     
