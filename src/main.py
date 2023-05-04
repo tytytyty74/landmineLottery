@@ -185,9 +185,8 @@ def gameInSession():
         screen.blit(screen_text, (screen_width - border - 50, border))
         
 
-    pygame.display.update()
-    timer.tick(15)
-    sleep(0.1)
+        pygame.display.update()
+        timer.tick(15)
 
 
 gameInSession()
