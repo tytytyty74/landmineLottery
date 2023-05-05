@@ -4,26 +4,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="3fd5b830-3910-44d1-866a-fe7d0d7fae95" name="Changes" comment="added pygame + show a red square">
-      <change afterPath="$PROJECT_DIR$/.idea/inspectionProfiles/Project_Default.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/resources/Grid.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/resources/empty.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/resources/flag.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/resources/grid1.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/resources/grid2.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/resources/grid3.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/resources/grid4.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/resources/grid5.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/resources/grid6.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/resources/grid7.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/resources/grid8.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/resources/mine.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/resources/mineClicked.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/resources/mineFalse.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/grid.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/grid.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/main.py" afterDir="false" />
-    </list>
+    <list default="true" id="3fd5b830-3910-44d1-866a-fe7d0d7fae95" name="Changes" comment="added pygame + show a red square" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
