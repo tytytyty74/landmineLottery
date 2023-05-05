@@ -1,6 +1,7 @@
 import pygame
 from random import randrange
 import random
+import sys 
 
 # resources 
 spr_mine = pygame.image.load("resources/mine.png")
@@ -23,12 +24,12 @@ spr_grid8 = pygame.image.load("resources/grid8.png")
 grid_size = 32
 border = 16
 top_border = 100
-game_width = 10
-game_height = 10
+game_width = 16
+game_height = 16
 
 # pygame setup stuff
 pygame.init()
-screen_yOffSet = 100
+screen_yOffSet = 150
 screen_xOffSet = 100
 screen_width = 16 * 25 * 2 + screen_xOffSet
 screen_height = 16 * 25 + 100 + screen_yOffSet
@@ -273,10 +274,10 @@ class Cell:
 
 
 # draw texts in center of screen
-def drawText(txt, s, yOff=0):
+def drawText(txt, s, xOffSet = 0, yOffSet = 0):
     screen_text = pygame.font.SysFont("Calibri", s, True).render(txt, True, (0, 0, 0))
     rect = screen_text.get_rect()
-    rect.center = (game_width / 2, game_height / 2)
+    rect.center = ((screen_width / 2) + xOffSet, (screen_height / 2) + yOffSet)
     screen.blit(screen_text, rect)
 
 
@@ -286,7 +287,7 @@ def gameInSession():
     grid_color = (128, 128, 128)
     bg_color = (192, 192, 192)
     gameState = "Playing"
-    mineLeft = 9  # Number of mine left
+    mineLeft = 18  # Number of mine left
     global grid
     grid = []
     global mines
@@ -294,10 +295,10 @@ def gameInSession():
     white = (255, 255, 255)
 
     # title screen
-    # test_font = pygame.font.Font('font/Pixeltype.ttf', 50)
-    # score_message_surf = test_font.render(f'LandmineLottery - {gameState}', False, (111, 196, 169))
-    # score_message_rect = score_message_surf.get_rect(center=(screen_width / 2, screen_yOffSet - 5))
-    # screen.blit(score_message_surf, score_message_rect)
+    test_font = pygame.font.Font('font/Pixeltype.ttf', 50)
+    score_message_surf = test_font.render(f'LandmineLottery', False, (111, 196, 169))
+    score_message_rect = score_message_surf.get_rect(center=(screen_width / 2, screen_yOffSet - 5))
+    screen.blit(score_message_surf, score_message_rect)
 
     # Generating mines
     mines = [[random.randrange(0, game_width),
@@ -387,29 +388,29 @@ def gameInSession():
         if gameState != "Game Over" and gameState != "Win":
             time += 1
         elif gameState == "Game Over":
-            drawText("Game Over!", 50)
-            drawText("R to restart", 35, 50)
+            drawText("Game Over!", 50, xOffSet=220)
+            drawText("R to restart", 35, xOffSet=220, yOffSet=100)
             for i in grid:
                 for j in i:
                     if j.flag and j.val != -1:
                         j.mineFalse = True
         else:
-            drawText("You WON!", 50)
-            drawText("R to restart", 35, 50)
+            drawText("You WON!", 50, xOffSet=220)
+            drawText("R to restart", 35, 50, xOffSet=220, yOffSet=100)
 
         # Draw time
         s = str(time // 15)
-        screen_text = pygame.font.SysFont("Calibri", 50).render(s, True, (0, 0, 0))
+        screen_text = pygame.font.SysFont("Calibri", 35).render(f'time: {s}', True, (0, 0, 0))
         screen.blit(screen_text, (border, border))
 
         # Draw mine left
-        screen_text = pygame.font.SysFont("Calibri", 50).render(mineLeft.__str__(), True, (0, 0, 0))
-        screen.blit(screen_text, (screen_width - border - 50, border))
+        screen_text = pygame.font.SysFont("Calibri", 35).render(f'mines: {mineLeft.__str__()}', True, (0, 0, 0))
+        screen.blit(screen_text, (screen_width - 150, border))
 
-    pygame.display.update()
-    timer.tick(15)  
+        pygame.display.update()
+        timer.tick(15)
 
 
 gameInSession()
-pygame.quit()
+sys.exit()
 quit()
